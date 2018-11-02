@@ -1,0 +1,80 @@
+//queue menu driven
+
+#include<stdio.h>
+#include<stdlib.h>
+#define SIZE 10
+int front=0,rear=-1;
+
+void insert(int arr[]);
+void del(int arr[]);
+void display(int arr[]);
+
+
+void main()
+{
+  int arr[20],i,response;
+  while(1)
+ {
+   printf("\nQueue Implementation\n");
+   printf("\n1.Insert \n2.Delete \n3.Display \n4.Exit\n");
+   printf("\nEnter your choice:");
+   scanf("%d",&response);
+   switch(response)
+   {
+   case 1 : insert(arr);
+        	break;
+   case 2 : del(arr);
+        	break;
+   case 3 : display(arr);
+        	break;
+   case 4 : exit(0);
+        	break;
+   default :printf("Enter the correct choice: ");
+   } 
+ }
+}
+
+void insert(int arr[])
+{
+int ele;
+if(rear>=SIZE-1)
+{
+ printf("\n Queue is full");
+}
+else
+{
+ printf("\nEnter the element to be inserted:");
+ scanf("%d",&ele);
+ arr[++rear]=ele;
+}
+}
+
+void del(int arr[])
+{
+  int deleteele;
+  if(front>rear)
+  {
+   printf("\nNothing can be deleted: ");
+  }
+  else
+  {
+   deleteele = arr[front];
+   front=front+1;
+   printf("\nDeleted element is %d",deleteele);
+  }
+}
+
+void display(int arr[])
+{
+ if(front==-1||front>rear)
+ {
+  printf("\n Nothing to display\n");
+  exit(0);
+ }
+ else
+ {
+ printf("The elements in the queue");
+ for(int i=front;i<=rear;i++)
+ printf("%d\n",arr[i]);
+ }
+}
