@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int data[5], size=5, front=-1, rear=-1;
+
+void enqueue(){
+    if(rear!=size-1){
+    if(rear == -1) front = rear = 0;
+   else rear++;
+printf("Enter the data\n");
+scanf("%d", &data[rear]);
+printf("\n%d entered successfully\n", data[rear]);
+    }
+else
+printf("Overflow\n");
+}
+void dequeue(){
+    if(front == -1) printf("Underflow\n");
+    else{
+        printf("%d deleted\n", data[front]);
+        if(front == rear) front = rear = -1;
+        else front++;
+    }
+}
+
+void display()
+{
+        if(front == -1) return;
+        int t=front;
+        while(t<=rear)
+     {
+        printf((t==rear)?"%d\n":"%d->", data[t]);
+                t++;
+        }
+    if(rear == -1) printf("No elements\n");
+}
+
+int main()
+{
+    int ch;
+printf("Queue menu:\n");
+printf("1)Enqueue\n2)Dequeue\n3)Display\n4)Exit");
+    do{
+printf("\nEnter your choice: ");
+scanf("%d", &ch);
+        switch(ch){
+            case 1: enqueue();     break;
+            case 2: dequeue();     break;
+            case 3: display();     break;
+        }
+    }while(ch!=4);
+}
