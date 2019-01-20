@@ -1,0 +1,133 @@
+
+
+#include<stdio.h>
+#include<stdlib.h>
+ 
+typedef struct btree
+{
+int data;
+struct btree *llink;
+struct btree *rlink;
+}node;
+
+ 
+node *newnode()
+{
+node *temp;
+printf("nEnter data:");
+temp=(node*)malloc(sizeof(node));
+scanf("%d",&temp->data);
+temp->llink=temp->rlink=NULL;
+return temp;
+}
+ 
+
+void insert(node *,node *);
+void search(int, node *);
+void preorder(node *);
+void inorder(node *);
+void postorder(node *);
+
+ 
+void main()
+{
+	char ch;
+	int ch1;
+	node *root=NULL,*temp;
+    
+	do
+	{
+            temp=newnode();
+    	if(root==NULL)
+        	root=temp;
+    	else    
+        	insert(root,temp);
+
+    	printf("Do you want to enter more nodes(y/n)?");
+    	scanf(" %c", &ch);
+    
+	}while(ch=='y'|ch=='Y');
+ 
+	printf("\ntraversal order:\n1.preorder\n2.inorder\n3.postorder4.search\nenter choice: ");
+	scanf("%d",&ch1);
+	switch(ch1)
+	{ case 1:preorder(root);
+         	break;
+  	case 2:inorder(root);
+         	break;
+  	case 3:postorder(root);
+         	break;
+             case 4: int element;
+                          printf(“enter search element:”);
+                          scanf(“%d”,&element)
+                          search(element,root);
+             break;
+ }
+  
+}
+
+void insert(node *root,node *temp)
+{
+    if(temp->data < root->data)
+  {
+  if(root->llink!=NULL)
+    insert(root->llink,temp);
+  else
+   root->llink=temp;
+}
+  if(temp->data>root->data)
+{
+  if(root->rlink!=NULL)
+        insert(root->rlink,temp);
+        else
+        root->rlink=temp;
+
+  }
+
+void search(int element, node *root)
+{
+
+if(root==NULL)
+return NULL;
+else if(element< root->data)
+return search(element,root->llink);
+else if(element > root->data)
+return search(element,root->rlink);
+else
+printf("element found");
+}
+
+void inorder(node *root)
+{
+  if(root!=NULL)
+	{
+ 	inorder(root->llink);
+ 	printf("%d\t",root->data);
+ 	inorder(root->rlink);
+	} 
+
+}
+
+void preorder(node *root)
+{
+  if(root!=NULL)
+	{
+ 	printf("%d\t",root->data);
+            preorder(root->llink);
+ 	preorder(root->rlink);
+	}
+
+}
+
+void postorder(node *root)
+{
+  if(root!=NULL)
+	{
+ 	postorder(root->llink);
+ 	postorder(root->rlink);
+ 	printf("%d\t",root->data);
+
+	}
+}
+
+
