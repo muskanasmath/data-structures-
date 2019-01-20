@@ -1,0 +1,58 @@
+
+
+#include<stdio.h>
+#include<stdlib.h>
+int A[10]={70,40,66,45,30,25,60,80,78,34},max=10;
+int Quick (int beg, int end)
+{
+ int left=beg, right=end, loc=beg, temp;
+ while(left<right)
+{
+ while(A[loc]<=A[right]&&loc!=right)
+ right=right-1;
+ if( loc==right )
+ return(loc);
+ if(A[loc]>A[right])
+ {
+   temp=A[loc];
+  A[loc] =A[right];
+  A[right]=temp;
+  loc=right;
+ }
+while(A[left]<=A[loc]&&left!=loc)
+ left=left+1;
+ if(loc==left)
+ return (loc);
+ if(A[left]>A[loc])
+ {
+  temp=A[loc];
+  A[loc]=A[left];
+  A[left]=temp;
+  loc=left;
+ }
+ }
+ return (loc);
+}
+    void Quick Sort(int Beg,int End)
+{
+    if(Beg<End)
+{
+   int loc=Quick(Beg, End);
+   QuickSort(Beg,loc-1);
+   QuickSort(loc+1,End);
+}
+}
+int main()
+{
+int k;
+printf ("before sorting list is\n");
+for(k=0;k<max;k++)
+printf("%d ",A[k]);
+QuickSort(0,max-1);
+printf("\nafter sorting list is\n");
+for(k=0;k<max;k++)
+printf("%d ",A[k]);
+return 0;
+}
+
+
